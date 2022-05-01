@@ -2,8 +2,8 @@ package core
 
 import (
 	"database/sql"
-	"go-mysql-data-core/internal/database"
-	"go-mysql-data-core/internal/migrations"
+	"github.com/SnowLynxSoftware/go-mysql-data-core/internal/database"
+	"github.com/SnowLynxSoftware/go-mysql-data-core/internal/migrations"
 )
 
 // DBMigrationData represents the name of a migration file and the SQL we need to run.

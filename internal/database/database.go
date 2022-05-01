@@ -3,8 +3,8 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"github.com/SnowLynxSoftware/go-mysql-data-core/configs"
 	_ "github.com/go-sql-driver/mysql"
-	"go-mysql-data-core/configs"
 )
 
 func InitializeDatabaseConnectionExec(connectionString string, allowMultiStatements bool) *sql.DB {

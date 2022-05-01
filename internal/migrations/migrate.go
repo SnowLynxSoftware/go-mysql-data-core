@@ -3,14 +3,14 @@ package migrations
 import (
 	"database/sql"
 	"fmt"
-	"go-mysql-data-core/internal/database"
-	"go-mysql-data-core/pkg/models"
+	"github.com/SnowLynxSoftware/go-mysql-data-core/internal/database"
+	"github.com/SnowLynxSoftware/go-mysql-data-core/pkg/core"
 	"strconv"
 )
 
-func MigrateDBExec(connectionString string, data []models.DBMigrationData) {
+func MigrateDBExec(connectionString string, data []core.DBMigrationData) {
 	// Open a Database Connection
-	db := database.InitializeDatabaseConnection(connectionString, true)
+	db := database.InitializeDatabaseConnectionExec(connectionString, true)
 
 	checkIfMigrationTableExists(db)
 
@@ -20,10 +20,10 @@ func MigrateDBExec(connectionString string, data []models.DBMigrationData) {
 		panic(err)
 	}
 
-	var events []models.DBMigrationEvent
+	var events []core.DBMigrationEvent
 
 	for results.Next() {
-		var event models.DBMigrationEvent
+		var event core.DBMigrationEvent
 
 		err = results.Scan(&event.ID, &event.Name, &event.File, &event.Created)
 		if err != nil {

@@ -1,4 +1,4 @@
-module go-mysql-data-core
+module github.com/SnowLynxSoftware/go-mysql-data-core
 
 go 1.18
 
