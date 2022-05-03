@@ -22,11 +22,9 @@ type DBMigrationEvent struct {
 	Created string `json:"created"`
 }
 
-// InitializeDatabaseConnection Given a connection string, will attempt to return a connection
-// to a MySQL Database. You can optionally pass in `allowMultiStatements` so you can run SQL
-// queries in batches.
-func InitializeDatabaseConnection(connectionString string, allowMultiStatements bool) *sql.DB {
-	return database.InitializeDatabaseConnectionExec(connectionString, allowMultiStatements)
+// CreateMySQLClient Create a new MySQL Client, so we can make a connection to a database.
+func CreateMySQLClient() database.MySQLDB {
+	return database.MySQLDB{}
 }
 
 // MigrateDB Given a connection string and an array of `MigrationData` scripts,
@@ -34,6 +32,6 @@ func InitializeDatabaseConnection(connectionString string, allowMultiStatements 
 // time you use this tool, it will auto create a `migrations` table on the database first.
 // Migrations are stored in that table, and you can go query the database directly
 // to check the status of a particular migration.
-func MigrateDB(connectionString string, data []DBMigrationData) {
-	migrations.MigrateDBExec(connectionString, data)
+func MigrateDB(db *sql.DB, data []DBMigrationData) {
+	migrations.MigrateDBExec(db, data)
 }

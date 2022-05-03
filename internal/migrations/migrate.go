@@ -3,15 +3,11 @@ package migrations
 import (
 	"database/sql"
 	"fmt"
-	"github.com/SnowLynxSoftware/go-mysql-data-core/internal/database"
 	"github.com/SnowLynxSoftware/go-mysql-data-core/pkg/core"
 	"strconv"
 )
 
-func MigrateDBExec(connectionString string, data []core.DBMigrationData) {
-	// Open a Database Connection
-	db := database.InitializeDatabaseConnectionExec(connectionString, true)
-
+func MigrateDBExec(db *sql.DB, data []core.DBMigrationData) {
 	checkIfMigrationTableExists(db)
 
 	// Get all current migration events
