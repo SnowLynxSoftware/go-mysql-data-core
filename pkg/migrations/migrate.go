@@ -3,11 +3,11 @@ package migrations
 import (
 	"database/sql"
 	"fmt"
-	"github.com/SnowLynxSoftware/go-mysql-data-core/pkg/core"
+	"github.com/SnowLynxSoftware/go-mysql-data-core/pkg/models"
 	"strconv"
 )
 
-func MigrateDBExec(db *sql.DB, data []core.DBMigrationData) {
+func MigrateDBExec(db *sql.DB, data []models.DBMigrationData) {
 	checkIfMigrationTableExists(db)
 
 	// Get all current migration events
@@ -16,10 +16,10 @@ func MigrateDBExec(db *sql.DB, data []core.DBMigrationData) {
 		panic(err)
 	}
 
-	var events []core.DBMigrationEvent
+	var events []models.DBMigrationEvent
 
 	for results.Next() {
-		var event core.DBMigrationEvent
+		var event models.DBMigrationEvent
 
 		err = results.Scan(&event.ID, &event.Name, &event.File, &event.Created)
 		if err != nil {
