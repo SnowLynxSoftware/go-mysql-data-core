@@ -7,8 +7,8 @@ import (
 	"strconv"
 )
 
-func MigrateDBExec(db *sql.DB, data []models.DBMigrationData) {
-	checkIfMigrationTableExists(db)
+func MigrateDBExec(db *sql.DB, dbName string, data []models.DBMigrationData) {
+	checkIfMigrationTableExists(db, dbName)
 
 	// Get all current migration events
 	results, err := db.Query("SELECT * from migrations")
@@ -74,8 +74,8 @@ func MigrateDBExec(db *sql.DB, data []models.DBMigrationData) {
 	}
 }
 
-func checkIfMigrationTableExists(db *sql.DB) {
-	results, err := db.Query("SELECT 1 FROM information_schema.TABLES WHERE TABLE_NAME = 'migrations' AND TABLE_SCHEMA = 'soul-auth';")
+func checkIfMigrationTableExists(db *sql.DB, dbName string) {
+	results, err := db.Query(fmt.Sprintf("SELECT 1 FROM information_schema.TABLES WHERE TABLE_NAME = 'migrations' AND TABLE_SCHEMA = '%s';", dbName))
 	tableNames := 0
 	if err != nil {
 		panic(err)

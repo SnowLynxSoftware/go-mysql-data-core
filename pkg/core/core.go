@@ -17,6 +17,6 @@ func CreateMySQLClient() database.MySQLDB {
 // time you use this tool, it will auto create a `migrations` table on the database first.
 // Migrations are stored in that table, and you can go query the database directly
 // to check the status of a particular migration.
-func MigrateDB(db *sql.DB, data []models.DBMigrationData) {
-	migrations.MigrateDBExec(db, data)
+func MigrateDB(db *sql.DB, dbName string, data []models.DBMigrationData) {
+	migrations.MigrateDBExec(db, dbName, data)
 }
